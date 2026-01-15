@@ -1,0 +1,260 @@
+{
+  "common": {
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "docs": "Documentation",
+    "blog": "Blog",
+    "careers": "Careers",
+    "contact": "Contact"
+  },
+  "footer": {
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "rights": "All rights reserved",
+    "tagline": "Building the future of AI-powered tools and services"
+  },
+  "home": {
+    "badge": "Powered by Advanced AI",
+    "title": "Build Smarter with",
+    "titleHighlight": "AI-Powered Solutions",
+    "subtitle": "Transform your workflow with our cutting-edge AI platform. Automate tasks, gain insights, and scale your business like never before.",
+    "watchDemo": "Watch Demo",
+    "startFreeTrial": "Start Your Free Trial",
+    "whyChoose": "Why Choose Our Platform?",
+    "whyChooseDesc": "Everything you need to harness the power of AI",
+    "readyToStart": "Ready to Get Started?",
+    "readyToStartDesc": "Join thousands of teams already using our AI platform",
+    "feature1": {
+      "title": "Lightning Fast",
+      "desc": "Experience blazing-fast AI processing with our optimized infrastructure"
+    },
+    "feature2": {
+      "title": "Enterprise Security",
+      "desc": "Your data is protected with bank-level encryption and compliance"
+    },
+    "feature3": {
+      "title": "Advanced Analytics",
+      "desc": "Gain deep insights with real-time analytics and reporting"
+    }
+  },
+  "features": {
+    "title": "Powerful Features",
+    "subtitle": "Everything you need to build amazing AI-powered products",
+    "feature1": {
+      "title": "Lightning Fast Processing",
+      "desc": "Experience blazing-fast AI responses with our optimized infrastructure and edge computing."
+    },
+    "feature2": {
+      "title": "Enterprise-Grade Security",
+      "desc": "Your data is protected with bank-level encryption, SOC 2 compliance, and GDPR readiness."
+    },
+    "feature3": {
+      "title": "Advanced Analytics",
+      "desc": "Gain deep insights with real-time dashboards, custom reports, and usage analytics."
+    },
+    "feature4": {
+      "title": "Global Availability",
+      "desc": "Deploy worldwide with our distributed network ensuring low latency everywhere."
+    },
+    "feature5": {
+      "title": "Seamless Integrations",
+      "desc": "Connect with your favorite tools through our comprehensive API and pre-built integrations."
+    },
+    "feature6": {
+      "title": "Team Collaboration",
+      "desc": "Work together efficiently with shared workspaces, role-based access, and audit logs."
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that's right for you",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "desc": "Perfect for trying out the platform",
+      "cta": "Get Started",
+      "feature1": "100 AI queries per month",
+      "feature2": "Basic chat interface",
+      "feature3": "Community support",
+      "feature4": "1 user seat"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$29",
+      "desc": "For professionals and small teams",
+      "cta": "Start Free Trial",
+      "feature1": "Unlimited AI queries",
+      "feature2": "Advanced analytics",
+      "feature3": "Priority support",
+      "feature4": "5 user seats",
+      "feature5": "API access",
+      "feature6": "Custom integrations"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "desc": "For large organizations",
+      "cta": "Contact Sales",
+      "feature1": "Everything in Pro",
+      "feature2": "Unlimited user seats",
+      "feature3": "Dedicated support",
+      "feature4": "SLA guarantee",
+      "feature5": "On-premise deployment",
+      "feature6": "Custom training"
+    },
+    "perMonth": "/month"
+  },
+  "about": {
+    "title": "About Our AI Platform",
+    "subtitle": "We're on a mission to democratize AI and make it accessible to everyone",
+    "mission": {
+      "title": "Our Mission",
+      "content": "To empower businesses and individuals with cutting-edge AI tools that are easy to use, affordable, and scalable. We believe AI should be accessible to everyone, not just tech giants."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "content": "A world where AI augments human capabilities and helps people achieve more. We're building tools that make AI integration seamless and intuitive for any workflow."
+    },
+    "story": {
+      "title": "Our Story",
+      "p1": "Founded in 2024, our platform was born from a simple observation: while AI technology was advancing rapidly, the tools to harness it remained complex and inaccessible to most businesses.",
+      "p2": "Our team of AI researchers, engineers, and designers came together to bridge this gap. We've built a platform that combines state-of-the-art AI models with an intuitive interface, making powerful AI capabilities available to everyone.",
+      "p3": "Today, we serve thousands of customers worldwide, from startups to Fortune 500 companies, all leveraging our platform to transform their businesses with AI."
+    }
+  },
+  "chat": {
+    "title": "AI Chat Assistant",
+    "placeholder": "Type your message...",
+    "send": "Send",
+    "welcome": "Hello! I'm your AI assistant. How can I help you today?",
+    "demoResponse": "I understand you're asking about \"{query}\". This is a demo response. In a real application, this would connect to your AI backend to generate intelligent responses based on your query."
+  },
+  "demo": {
+    "title": "Try Our AI Chat",
+    "subtitle": "Experience the power of our AI assistant in this interactive demo"
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your account to continue",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "orContinueWith": "Or continue with",
+    "continueWithGoogle": "Continue with Google",
+    "unexpectedError": "An unexpected error occurred"
+  },
+  "signup": {
+    "title": "Create an account",
+    "subtitle": "Start your AI journey today",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Min. 6 characters",
+    "confirmPassword": "Confirm Password",
+    "terms": "By signing up, you agree to our",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "hasAccount": "Already have an account?",
+    "signInLink": "Sign in",
+    "createAccount": "Create Account",
+    "creatingAccount": "Creating account...",
+    "orContinueWith": "Or continue with",
+    "continueWithGoogle": "Continue with Google",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "checkEmailConfirm": "Please check your email to confirm your account",
+    "unexpectedError": "An unexpected error occurred"
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back",
+    "welcome": "Welcome",
+    "loggedInAs": "You're logged in as",
+    "yourProfile": "Your Profile",
+    "name": "Name",
+    "email": "Email",
+    "userId": "User ID",
+    "memberSince": "Member since",
+    "notSet": "Not set",
+    "quickActions": "Quick Actions",
+    "startAiChat": "→ Start AI Chat",
+    "accountSettings": "→ Account Settings",
+    "editProfile": "→ Edit Profile",
+    "profileData": "Profile Data"
+  },
+  "profile": {
+    "title": "Edit Profile",
+    "subtitle": "Update your personal information",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email",
+    "avatarUrl": "Avatar URL",
+    "avatarUrlPlaceholder": "https://example.com/avatar.jpg",
+    "saveChanges": "Save Changes",
+    "saving": "Saving...",
+    "back": "Back",
+    "updateSuccess": "Profile updated successfully!",
+    "updateError": "Error updating profile"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account preferences",
+    "appearance": "Appearance",
+    "appearanceDesc": "Customize how the application looks and feels",
+    "theme": "Theme",
+    "language": "Language",
+    "emailNotifications": "Email Notifications",
+    "emailNotificationsDesc": "Receive email updates about your account",
+    "saveChanges": "Save Changes",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "savedSuccessfully": "Settings saved successfully!",
+    "errorSaving": "Error saving settings",
+    "errorLoading": "Error loading settings"
+  },
+  "auth": {
+    "alreadyLoggedIn": "Already Logged In",
+    "alreadyLoggedInDesc": "You are already logged in as",
+    "goToDashboard": "Go to Dashboard",
+    "signOut": "Sign Out",
+    "signingOut": "Signing out..."
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights, tutorials, and updates about AI and technology",
+    "readMore": "Read More",
+    "publishedAt": "Published on",
+    "by": "By",
+    "backToList": "← Back to Blog",
+    "relatedPosts": "Related Posts",
+    "noPosts": "No posts found",
+    "noPostsDesc": "Check back later for new content",
+    "featuredPost": "Featured"
+  }
+}
