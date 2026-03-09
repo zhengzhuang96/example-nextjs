@@ -260,7 +260,6 @@ className="bg-blue-500 text-white"
 
 如果这个项目对你有帮助，请给一个 ⭐️ star！
 
-
 <div align="center">
 
 [⬆ 返回顶部](#next-js-学习模板-)
