@@ -146,7 +146,7 @@ export default function StructurePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {keyConcepts.map((concept, index) => (
-              <Card key={index} className="p-6" hover>
+              <Card key={index} className="p-6">
                 <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
                   {concept.title}
                 </h3>

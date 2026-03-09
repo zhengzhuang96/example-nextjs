@@ -63,7 +63,7 @@ export default function PostsPage() {
                 文章管理
               </h1>
             </div>
-            <Button variant="primary" onClick={() => alert("创建文章功能开发中...")}>
+            <Button variant="default" onClick={() => alert("创建文章功能开发中...")}>
               + 新建文章
             </Button>
           </div>
@@ -145,7 +145,7 @@ export default function PostsPage() {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               开始创建你的第一篇文章吧
             </p>
-            <Button variant="primary" onClick={() => alert("创建文章功能开发中...")}>
+            <Button variant="default" onClick={() => alert("创建文章功能开发中...")}>
               + 新建文章
             </Button>
           </Card>

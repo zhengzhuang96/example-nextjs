@@ -121,7 +121,6 @@ export default function RoutingPage() {
               <Card
                 key={concept.id}
                 className={`p-6 border-l-4 ${getColorClasses(concept.color)}`}
-                hover
               >
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
@@ -154,7 +153,7 @@ export default function RoutingPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {routingFeatures.map((item, index) => (
-              <Card key={index} className="p-6" hover>
+              <Card key={index} className="p-6">
                 <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">
                   {item.feature}
                 </h3>
