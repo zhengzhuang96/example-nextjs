@@ -41,6 +41,12 @@ export default function AdminLayout({
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   useEffect(() => {
+    // 如果是登录页面，跳过认证检查
+    if (pathname === "/admin/login") {
+      setIsLoading(false);
+      return;
+    }
+
     const checkAuth = async () => {
       const token = sessionStorage.getItem("adminToken");
       if (!token) {
@@ -57,7 +63,7 @@ export default function AdminLayout({
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, pathname]);
 
   const handleLogout = () => {
     sessionStorage.removeItem("adminToken");
