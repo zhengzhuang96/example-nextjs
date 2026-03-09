@@ -2,11 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  // 点击外部关闭菜单
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (userMenuOpen && !target.closest(".user-menu-container")) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userMenuOpen]);
 
   const navItems = [
     { href: "/", label: "🏠 首页", icon: "🏠" },
@@ -53,6 +69,71 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
+          </div>
+
+          {/* User Menu */}
+          <div className="relative user-menu-container">
+            <button
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              className="flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              {/* 用户头像 */}
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-medium">
+                我
+              </div>
+              {/* 下拉箭头 */}
+              <svg
+                className={`w-4 h-4 transition-transform ${userMenuOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* 下拉菜单 */}
+            {userMenuOpen && (
+              <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+                <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    欢迎使用 Next.js 学习
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    探索现代 Web 开发
+                  </p>
+                </div>
+
+                <Link
+                  href="/admin/dashboard"
+                  className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  <span className="mr-2">⚡</span>
+                  工作台
+                </Link>
+
+                <Link
+                  href="/admin/login"
+                  className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  <span className="mr-2">🔐</span>
+                  Admin 管理
+                </Link>
+
+                <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+                  <Link
+                    href="/"
+                    className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <span className="mr-2">🏠</span>
+                    返回首页
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
