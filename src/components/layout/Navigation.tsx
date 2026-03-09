@@ -10,6 +10,7 @@ export default function Navigation() {
 
   const navItems = [
     { href: "/", label: "🏠 首页", icon: "🏠" },
+    { href: "/search", label: "🔍 搜索", icon: "🔍" },
     { href: "/blog", label: "📝 博客示例", icon: "📝" },
     { href: "/structure", label: "🏗️ 项目结构", icon: "🏗️" },
     { href: "/routing", label: "🚀 路由系统", icon: "🚀" },
