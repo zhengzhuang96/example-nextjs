@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
-import { searchPosts } from "@/lib/blog-data";
+import { searchPosts, BlogPost } from "@/lib/blog-data";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<typeof searchPosts.return>([]);
+  const [results, setResults] = useState<BlogPost[]>([]);
   const [isSearched, setIsSearched] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
