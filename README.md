@@ -260,17 +260,8 @@ className="bg-blue-500 text-white"
 
 如果这个项目对你有帮助，请给一个 ⭐️ star！
 
-## 📮 联系方式
-
-- 作者：zhengzhuang
-- 邮箱：zhengzhuang@yuanduyun.com
-- GitHub：[@zhengzhuang96](https://github.com/zhengzhuang96)
-
----
 
 <div align="center">
-
-**Made with ❤️ using Next.js 15 and TypeScript**
 
 [⬆ 返回顶部](#next-js-学习模板-)
 
