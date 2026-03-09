@@ -9,7 +9,11 @@
       "Bash(pnpm run build)",
       "Bash(git add -A)",
       "Bash(git commit:*)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(git add src/app/login/layout.tsx)",
+      "Bash(ls -la \"src/app/\\(auth\\)/\")",
+      "Bash(ls -la \"src/app/\\(auth\\)/login/\")",
+      "Bash(ls -la \"src/app/\\(website\\)/\")"
     ],
     "additionalDirectories": [
       "/Users/zhengzhuang/github/example-nextjs/src/app"
