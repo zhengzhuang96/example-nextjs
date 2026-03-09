@@ -41,22 +41,16 @@ export default function AdminLayout({
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   useEffect(() => {
-    // 如果是登录页面，跳过认证检查
-    if (pathname === "/admin/login") {
-      setIsLoading(false);
-      return;
-    }
-
     const checkAuth = async () => {
       const token = sessionStorage.getItem("adminToken");
       if (!token) {
-        router.push("/admin/login");
+        router.push("/login");
         return;
       }
 
       const user = await verifyAdminSession(token);
       if (!user) {
-        router.push("/admin/login");
+        router.push("/login");
       } else {
         setIsLoading(false);
       }
@@ -67,7 +61,7 @@ export default function AdminLayout({
 
   const handleLogout = () => {
     sessionStorage.removeItem("adminToken");
-    router.push("/admin/login");
+    router.push("/login");
   };
 
   const menuItems = [

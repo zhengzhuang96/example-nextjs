@@ -80,13 +80,13 @@ export default function CommentsPage() {
   useEffect(() => {
     const token = sessionStorage.getItem("adminToken");
     if (!token) {
-      router.push("/admin/login");
+      router.push("/login");
       return;
     }
 
     verifyAdminSession(token).then((user) => {
       if (!user) {
-        router.push("/admin/login");
+        router.push("/login");
       } else {
         setIsLoading(false);
       }

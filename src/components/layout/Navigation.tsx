@@ -117,7 +117,7 @@ export default function Navigation() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/admin/login" className="cursor-pointer">
+                  <Link href="/login" className="cursor-pointer">
                     <Lock className="mr-2 h-4 w-4" />
                     <span>Admin 管理</span>
                   </Link>
