@@ -3,7 +3,12 @@
     "allow": [
       "Read(//Users/zhengzhuang/.npm/_logs/**)",
       "Read(//Users/zhengzhuang/**)",
-      "Bash(pnpm dlx shadcn@latest add button card input label textarea select)"
+      "Bash(pnpm dlx shadcn@latest add button card input label textarea select)",
+      "Bash(printf \"y\\\\ny\\\\n\")",
+      "Bash(pnpm dlx shadcn@latest add switch tabs separator scroll-area)",
+      "Bash(pnpm run build)",
+      "Bash(git add -A)",
+      "Bash(git commit:*)"
     ],
     "additionalDirectories": [
       "/Users/zhengzhuang/github/example-nextjs/src/app"

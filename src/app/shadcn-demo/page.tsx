@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
+import Card from "@/components/ui/card";
+import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -231,7 +231,7 @@ export default function ShadcnDemoPage() {
             1. 所有组件都已安装到 <code className="bg-blue-100 dark:bg-blue-800 px-2 py-0.5 rounded">src/components/ui/</code> 目录
           </p>
           <p>
-            2. 导入示例：<code className="bg-blue-100 dark:bg-blue-800 px-2 py-0.5 rounded">import {{ '{' }} Button {{ '}' }} from "@/components/ui/button"</code>
+            2. 导入示例：<code className="bg-blue-100 dark:bg-blue-800 px-2 py-0.5 rounded">{`import { Button } from "@/components/ui/button"`}</code>
           </p>
           <p>
             3. 添加更多组件：<code className="bg-blue-100 dark:bg-blue-800 px-2 py-0.5 rounded">pnpm dlx shadcn@latest add [component-name]</code>

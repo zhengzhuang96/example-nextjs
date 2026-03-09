@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/card";
 import { useState } from "react";
 
 export default function RoutingPage() {

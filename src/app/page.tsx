@@ -1,4 +1,4 @@
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/card";
 import LearningCard from "@/components/ui/LearningCard";
 import Link from "next/link";
 

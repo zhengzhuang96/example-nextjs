@@ -4,6 +4,30 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { verifyAdminSession } from "@/lib/admin/auth";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  LayoutDashboard,
+  FileText,
+  MessageSquare,
+  Users,
+  Settings,
+  LogOut,
+  Globe,
+  Menu,
+  X,
+  Home
+} from "lucide-react";
 
 export default function AdminLayout({
   children,
@@ -35,21 +59,6 @@ export default function AdminLayout({
     checkAuth();
   }, [router]);
 
-  // 点击外部关闭菜单
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (userMenuOpen && !target.closest(".user-menu-container")) {
-        setUserMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [userMenuOpen]);
-
   const handleLogout = () => {
     sessionStorage.removeItem("adminToken");
     router.push("/admin/login");
@@ -58,65 +67,63 @@ export default function AdminLayout({
   const menuItems = [
     {
       href: "/admin/dashboard",
-      icon: "📊",
+      icon: LayoutDashboard,
       label: "仪表板",
     },
     {
       href: "/admin/posts",
-      icon: "📝",
+      icon: FileText,
       label: "文章管理",
     },
     {
       href: "/admin/comments",
-      icon: "💬",
+      icon: MessageSquare,
       label: "评论管理",
     },
     {
       href: "/admin/users",
-      icon: "👥",
+      icon: Users,
       label: "用户管理",
     },
     {
       href: "/admin/settings",
-      icon: "⚙️",
+      icon: Settings,
       label: "系统设置",
     },
   ];
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">加载中...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">加载中...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       {/* 顶部导航栏 */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 z-50">
+      <header className="fixed top-0 left-0 right-0 h-16 bg-background border-b z-50">
         <div className="flex items-center justify-between h-full px-4">
           {/* 左侧：Logo 和汉堡菜单 */}
           <div className="flex items-center space-x-4">
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+              className="lg:hidden"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {sidebarOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+              {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
 
             <Link href="/admin/dashboard" className="flex items-center space-x-2">
-              <span className="text-2xl">⚡</span>
-              <span className="text-xl font-bold text-gray-800 dark:text-white hidden sm:block">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">⚡</span>
+              </div>
+              <span className="text-lg font-bold text-foreground hidden sm:block">
                 管理后台
               </span>
             </Link>
@@ -125,69 +132,60 @@ export default function AdminLayout({
           {/* 右侧：面包屑和用户菜单 */}
           <div className="flex items-center space-x-4">
             {/* 面包屑 */}
-            <div className="hidden md:flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <Link href="/admin/dashboard" className="hover:text-gray-900 dark:hover:text-white">
+            <div className="hidden md:flex items-center text-sm text-muted-foreground">
+              <Link href="/admin/dashboard" className="hover:text-foreground transition-colors">
                 首页
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-gray-900 dark:text-white">
+              <span className="text-foreground">
                 {menuItems.find(item => item.href === pathname)?.label || "管理后台"}
               </span>
             </div>
 
             {/* 用户菜单 */}
-            <div className="relative user-menu-container">
-              <button
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-medium">
-                  管
-                </div>
-                <svg
-                  className={`w-4 h-4 transition-transform ${userMenuOpen ? "rotate-180" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
-                  <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      管理员
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <DropdownMenu open={userMenuOpen} onOpenChange={setUserMenuOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+                  <Avatar className="h-9 w-9">
+                    <AvatarFallback className="bg-primary text-primary-foreground">
+                      管
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">管理员</p>
+                    <p className="text-xs leading-none text-muted-foreground">
                       admin@example.com
                     </p>
                   </div>
-
-                  <Link
-                    href="/"
-                    target="_blank"
-                    className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                    onClick={() => setUserMenuOpen(false)}
-                  >
-                    <span className="mr-2">🌐</span>
-                    查看网站
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/" target="_blank" className="cursor-pointer">
+                    <Globe className="mr-2 h-4 w-4" />
+                    <span>查看网站</span>
                   </Link>
-
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setUserMenuOpen(false);
-                    }}
-                    className="flex items-center w-full px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                  >
-                    <span className="mr-2">🚪</span>
-                    退出登录
-                  </button>
-                </div>
-              )}
-            </div>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/" className="cursor-pointer">
+                    <Home className="mr-2 h-4 w-4" />
+                    <span>返回首页</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="text-destructive focus:text-destructive cursor-pointer"
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>退出登录</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
@@ -195,48 +193,51 @@ export default function AdminLayout({
       <div className="flex pt-16">
         {/* 左侧边栏 */}
         <aside
-          className={`fixed top-16 left-0 bottom-0 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 z-40 transition-transform duration-300 ${
+          className={`fixed top-16 left-0 bottom-0 w-64 bg-background border-r z-40 transition-transform duration-300 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0`}
         >
-          <div className="p-4 h-full overflow-y-auto">
-            <nav className="space-y-2">
+          <ScrollArea className="h-full py-4">
+            <nav className="px-3 space-y-1">
               {menuItems.map((item) => {
                 const isActive = pathname === item.href;
+                const Icon = item.icon;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    className={`flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                     }`}
                   >
-                    <span className="text-lg">{item.icon}</span>
+                    <Icon className="h-4 w-4" />
                     <span>{item.label}</span>
                   </Link>
                 );
               })}
             </nav>
 
+            <Separator className="my-4" />
+
             {/* 底部链接 */}
-            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-3">
               <Link
                 href="/"
-                className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
               >
-                <span>🏠</span>
+                <Home className="h-4 w-4" />
                 <span>返回首页</span>
               </Link>
             </div>
-          </div>
+          </ScrollArea>
         </aside>
 
         {/* 遮罩层（移动端） */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}

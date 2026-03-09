@@ -3,8 +3,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Card from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { verifyAdmin, createAdminSession } from "@/lib/admin/auth";
+import { Lock, ArrowLeft, Lightbulb } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -39,84 +49,98 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Logo 和标题 */}
         <div className="text-center mb-8">
-          <div className="text-5xl mb-4">🔐</div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary flex items-center justify-center">
+            <Lock className="w-8 h-8 text-primary-foreground" />
+          </div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             管理员登录
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-muted-foreground">
             Next.js 学习模板后台管理系统
           </p>
         </div>
 
         {/* 登录表单 */}
-        <Card className="p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 px-4 py-3 rounded-lg text-sm">
-                {error}
+        <Card>
+          <CardHeader className="space-y-1">
+            <CardTitle>登录账户</CardTitle>
+            <CardDescription>
+              请输入您的管理员凭证以继续
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <div className="bg-destructive/10 text-destructive px-4 py-3 rounded-lg text-sm border border-destructive/20">
+                  {error}
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <Label htmlFor="username">用户名</Label>
+                <Input
+                  id="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  placeholder="请输入用户名"
+                  required
+                  disabled={isLoading}
+                />
               </div>
-            )}
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                用户名
-              </label>
-              <input
-                type="text"
-                value={formData.username}
-                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                placeholder="请输入用户名"
-                required
-              />
+              <div className="space-y-2">
+                <Label htmlFor="password">密码</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  placeholder="请输入密码"
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? "登录中..." : "登录"}
+              </Button>
+            </form>
+
+            {/* 演示账号提示 */}
+            <div className="mt-6 p-4 bg-muted/50 rounded-lg border">
+              <div className="flex items-start gap-2">
+                <Lightbulb className="w-4 h-4 text-muted-foreground mt-0.5" />
+                <div className="flex-1 space-y-2">
+                  <p className="text-sm font-medium text-foreground">
+                    演示账号
+                  </p>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <p>用户名: <code className="bg-background px-2 py-0.5 rounded border">admin</code></p>
+                    <p>密码: <code className="bg-background px-2 py-0.5 rounded border">admin123</code></p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                密码
-              </label>
-              <input
-                type="password"
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                placeholder="请输入密码"
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-slate-600 text-white py-3 rounded-lg font-medium hover:from-blue-700 hover:to-slate-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? "登录中..." : "登录"}
-            </button>
-          </form>
-
-          {/* 演示账号提示 */}
-          <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-2">
-              💡 演示账号
-            </p>
-            <div className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
-              <p>用户名: <code className="bg-blue-100 dark:bg-blue-800 px-2 py-0.5 rounded">admin</code></p>
-              <p>密码: <code className="bg-blue-100 dark:bg-blue-800 px-2 py-0.5 rounded">admin123</code></p>
-            </div>
-          </div>
+          </CardContent>
         </Card>
 
         {/* 返回链接 */}
         <div className="text-center mt-6">
           <Link
             href="/"
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            ← 返回首页
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            返回首页
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/card";
 import { getPostBySlug, blogPosts, getRecentPosts } from "@/lib/blog-data";
 
 // 生成静态参数（用于静态生成）

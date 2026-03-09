@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/card";
 
 export default function DataFetchingPage() {
   const [activeTab, setActiveTab] = useState<string>("server");

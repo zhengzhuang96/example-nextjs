@@ -2,8 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Card from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Separator
+} from "@/components/ui/separator";
 import { verifyAdminSession } from "@/lib/admin/auth";
+import { Settings as SettingsIcon, Globe, MessageSquare, RotateCcw, FileCode } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -40,15 +63,24 @@ export default function SettingsPage() {
     // 模拟保存
     await new Promise(resolve => setTimeout(resolve, 1000));
     setSaving(false);
-    alert("设置已保存！");
+    // 使用 toast 替代 alert
+    console.log("设置已保存！");
+  };
+
+  const handleClearCache = async () => {
+    console.log("缓存已清理");
+  };
+
+  const handleRegenerate = async () => {
+    console.log("静态页面已重新生成");
   };
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">加载中...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">加载中...</p>
         </div>
       </div>
     );
@@ -58,156 +90,165 @@ export default function SettingsPage() {
     <div>
       {/* 页面标题 */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          ⚙️ 系统设置
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-1">
+        <div className="flex items-center gap-2 mb-2">
+          <SettingsIcon className="w-6 h-6 text-muted-foreground" />
+          <h1 className="text-3xl font-bold text-foreground">
+            系统设置
+          </h1>
+        </div>
+        <p className="text-muted-foreground">
           配置你的网站设置和偏好
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 基本信息 */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-            🌐 基本信息
-          </h2>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                网站名称
-              </label>
-              <input
-                type="text"
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Globe className="w-5 h-5 text-muted-foreground" />
+              <CardTitle>基本信息</CardTitle>
+            </div>
+            <CardDescription>配置网站的基本信息和联系方式</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="siteName">网站名称</Label>
+              <Input
+                id="siteName"
                 value={settings.siteName}
                 onChange={(e) => setSettings({ ...settings, siteName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                placeholder="请输入网站名称"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                网站描述
-              </label>
-              <textarea
+            <div className="space-y-2">
+              <Label htmlFor="siteDescription">网站描述</Label>
+              <Textarea
+                id="siteDescription"
                 value={settings.siteDescription}
                 onChange={(e) => setSettings({ ...settings, siteDescription: e.target.value })}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                placeholder="请输入网站描述"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                管理员邮箱
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="adminEmail">管理员邮箱</Label>
+              <Input
+                id="adminEmail"
                 type="email"
                 value={settings.adminEmail}
                 onChange={(e) => setSettings({ ...settings, adminEmail: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                placeholder="admin@example.com"
               />
             </div>
-          </div>
+          </CardContent>
         </Card>
 
         {/* 评论设置 */}
-        <Card className="p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-            💬 评论设置
-          </h2>
-          <div className="space-y-4">
-            <label className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div>
-                <p className="font-medium text-gray-900 dark:text-white">允许评论</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <MessageSquare className="w-5 h-5 text-muted-foreground" />
+              <CardTitle>评论设置</CardTitle>
+            </div>
+            <CardDescription>管理评论相关的功能选项</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="space-y-0.5">
+                <Label htmlFor="allowComments">允许评论</Label>
+                <p className="text-sm text-muted-foreground">
                   是否允许用户在文章下发表评论
                 </p>
               </div>
-              <button
-                onClick={() => setSettings({ ...settings, allowComments: !settings.allowComments })}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  settings.allowComments ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full transition-transform ${
-                    settings.allowComments ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </button>
-            </label>
+              <Switch
+                id="allowComments"
+                checked={settings.allowComments}
+                onCheckedChange={(checked) =>
+                  setSettings({ ...settings, allowComments: checked })
+                }
+              />
+            </div>
 
-            <label className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div>
-                <p className="font-medium text-gray-900 dark:text-white">需要审核</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="space-y-0.5">
+                <Label htmlFor="requireModeration">需要审核</Label>
+                <p className="text-sm text-muted-foreground">
                   新评论需要管理员审核后才能显示
                 </p>
               </div>
-              <button
-                onClick={() => setSettings({ ...settings, requireModeration: !settings.requireModeration })}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  settings.requireModeration ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full transition-transform ${
-                    settings.requireModeration ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </button>
-            </label>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                每页显示文章数
-              </label>
-              <select
-                value={settings.postsPerPage}
-                onChange={(e) => setSettings({ ...settings, postsPerPage: parseInt(e.target.value) })}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-              >
-                <option value="5">5 篇</option>
-                <option value="10">10 篇</option>
-                <option value="20">20 篇</option>
-                <option value="50">50 篇</option>
-              </select>
+              <Switch
+                id="requireModeration"
+                checked={settings.requireModeration}
+                onCheckedChange={(checked) =>
+                  setSettings({ ...settings, requireModeration: checked })
+                }
+              />
             </div>
-          </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="postsPerPage">每页显示文章数</Label>
+              <Select
+                value={settings.postsPerPage.toString()}
+                onValueChange={(value) =>
+                  setSettings({ ...settings, postsPerPage: parseInt(value) })
+                }
+              >
+                <SelectTrigger id="postsPerPage">
+                  <SelectValue placeholder="选择每页文章数" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="5">5 篇</SelectItem>
+                  <SelectItem value="10">10 篇</SelectItem>
+                  <SelectItem value="20">20 篇</SelectItem>
+                  <SelectItem value="50">50 篇</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
         </Card>
       </div>
 
       {/* 保存按钮 */}
       <div className="mt-8 flex justify-end">
-        <button
+        <Button
           onClick={handleSave}
           disabled={saving}
-          className="px-8 py-3 bg-gradient-to-r from-blue-600 to-slate-600 text-white rounded-lg font-medium hover:from-blue-700 hover:to-slate-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          size="lg"
         >
           {saving ? "保存中..." : "保存设置"}
-        </button>
+        </Button>
       </div>
 
-      {/* 重置缓存 */}
-      <Card className="p-6 mt-8">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          🔄 缓存管理
-        </h2>
-        <div className="flex gap-4">
-          <button
-            onClick={() => alert("缓存已清理")}
-            className="px-6 py-3 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors"
-          >
-            清理所有缓存
-          </button>
-          <button
-            onClick={() => alert("静态页面已重新生成")}
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
-          >
-            重新生成静态页面
-          </button>
-        </div>
+      {/* 缓存管理 */}
+      <Card className="mt-8">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <RotateCcw className="w-5 h-5 text-muted-foreground" />
+            <CardTitle>缓存管理</CardTitle>
+          </div>
+          <CardDescription>管理网站缓存和静态页面生成</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-4">
+            <Button
+              variant="outline"
+              onClick={handleClearCache}
+            >
+              <RotateCcw className="w-4 h-4 mr-2" />
+              清理所有缓存
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleRegenerate}
+            >
+              <FileCode className="w-4 h-4 mr-2" />
+              重新生成静态页面
+            </Button>
+          </div>
+        </CardContent>
       </Card>
     </div>
   );

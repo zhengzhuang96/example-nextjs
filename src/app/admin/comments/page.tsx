@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/card";
 import { verifyAdminSession } from "@/lib/admin/auth";
 
 export default function CommentsPage() {
