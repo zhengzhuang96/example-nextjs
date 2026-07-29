@@ -9,7 +9,8 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+// 自建 PostgreSQL 未启用 SSL，关闭强制 SSL（原课程为 Vercel Postgres 默认 ssl: 'require'）
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: false });
 
 export async function fetchRevenue() {
   try {
@@ -17,11 +18,11 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch completed after 3 seconds.');
+    console.log('Data fetch completed after 3 seconds.');
 
     return data;
   } catch (error) {
@@ -52,6 +53,7 @@ export async function fetchLatestInvoices() {
 
 export async function fetchCardData() {
   try {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
     // how to initialize multiple queries in parallel with JS.

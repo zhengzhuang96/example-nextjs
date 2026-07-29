@@ -2,7 +2,8 @@ import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+// 自建 PostgreSQL 未启用 SSL，关闭强制 SSL（原课程为 Vercel Postgres 默认 ssl: 'require'）
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: false });
 
 async function seedUsers() {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
