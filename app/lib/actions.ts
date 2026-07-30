@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import postgres from 'postgres';
 import { redirect } from 'next/navigation';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 // 自建 PostgreSQL 未启用 SSL，关闭强制 SSL（原课程为 Vercel Postgres 默认 ssl: 'require'）
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: false });
@@ -99,12 +101,30 @@ export async function updateInvoice(id: string, formData: FormData) {
 }
 
 export async function deleteInvoice(id: string) {
-  throw new Error('Failed to Delete Invoice');
   try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
   }
   catch (e) {
     console.error(e);
+  }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
   }
 }
