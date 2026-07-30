@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: '客户',
+};
+
 export default function Customers() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
